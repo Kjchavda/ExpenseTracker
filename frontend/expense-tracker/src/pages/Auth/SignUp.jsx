@@ -6,6 +6,7 @@ import AuthLayout from '../../components/layouts/AuthLayout'
 import Input from '../../components/Inputs/Input';
 import { validateEmail } from '../../utils/helper';
 import ProfilePhotoSelector from '../../components/Inputs/ProfilePhotoSelector';
+import axios from '../../api/axios';
 
 function SignUp() {
   const [profilePic, setProfilePic] = useState(null);
@@ -16,7 +17,7 @@ function SignUp() {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
 
-  const handleSignup = (e) => {
+  const handleSignup = async (e) => {
     e.preventDefault();
 
     let profileImageUrl = "";
@@ -37,6 +38,23 @@ function SignUp() {
     setError("");
 
     //signUp API call.
+    try {
+    const response = await axios.post("http://localhost:8000/auth/signup", {
+      name: fullName,
+      email: email,
+      password: password
+    });
+    navigate("/login");
+  } catch (err) {
+    if (err.response && err.response.data) {
+      console.error("Signup error:", err.response.data);
+      setError(err.response.data.detail || "Signup failed");
+    } else {
+      console.error("Unexpected error:", err);
+      setError("Something went wrong. Please try again.");
+    }
+  }
+ 
   }
 
   return (

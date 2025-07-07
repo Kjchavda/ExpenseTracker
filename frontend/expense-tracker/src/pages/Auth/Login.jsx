@@ -5,6 +5,8 @@ import { Link } from 'react-router-dom';
 import AuthLayout from '../../components/layouts/AuthLayout'
 import Input from '../../components/Inputs/Input';
 import { validateEmail } from '../../utils/helper';
+import axios from '../../api/axios';
+import { useAuth } from '../../context/AuthContext';
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -12,6 +14,7 @@ function Login() {
   const [password, setPassword] = useState("");
   const [error, setError] = useState(null);
   const navigate = useNavigate();
+  const { login } = useAuth();
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -28,7 +31,24 @@ function Login() {
 
     setError("");
 
-    //API call for LOGIN. 
+    //API call for LOGIN.
+    try {
+      const response = await axios.post("/auth/login", new URLSearchParams({
+        username: email,
+        password: password
+      }));
+
+      const token = response.data.access_token;
+      login(token); // ✅ store token in context and localStorage
+      navigate("/dashboard");
+    } catch (err) {
+      if (err.response && err.response.data) {
+        setError(err.response.data.detail || "Login failed");
+      } else {
+        setError("Something went wrong. Please try again.");
+      }
+    } 
+    
   }
 
   return (
