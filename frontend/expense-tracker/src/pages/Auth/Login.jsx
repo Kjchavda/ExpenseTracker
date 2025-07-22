@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 
@@ -7,6 +7,7 @@ import Input from '../../components/Inputs/Input';
 import { validateEmail } from '../../utils/helper';
 import axios from '../../api/axios';
 import { useAuth } from '../../context/AuthContext';
+import { UserContext } from '../../context/UserContext';
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -15,6 +16,7 @@ function Login() {
   const [error, setError] = useState(null);
   const navigate = useNavigate();
   const { login } = useAuth();
+  const { updateUser } = useContext(UserContext);
 
   const handleLogin = async (e) => {
     e.preventDefault();
@@ -39,7 +41,9 @@ function Login() {
       }));
 
       const token = response.data.access_token;
+      const user = response.data.user;
       login(token); // ✅ store token in context and localStorage
+      updateUser(user)
       navigate("/dashboard");
     } catch (err) {
       if (err.response && err.response.data) {

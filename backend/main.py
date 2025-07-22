@@ -3,7 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 
 from backend import models
 from backend.database import engine
-from backend.routers import auth_router
+from backend.routers import auth_router, dashboard_router, expense_router, income_router
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -22,9 +22,9 @@ app.add_middleware(
     allow_headers=["*"],              # ✅ Allow all headers (including Authorization)
 )
 
-#app.include_router(expense_router.expense_router)
-#app.include_router(income_router.income_router)
-#app.include_router(dashboard_router.dashboard_router)
+app.include_router(expense_router.expense_router)
+app.include_router(income_router.income_router)
+app.include_router(dashboard_router.dashboard_router)
 app.include_router(auth_router.auth_router)
 
 

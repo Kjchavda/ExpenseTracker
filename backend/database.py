@@ -30,30 +30,3 @@ def get_db():
         db.close()
 
 
-#db users test
-'''
-Enter dummy users to rmb username and password:
-{
-    "email": "xyz@gmail.com",
-    "password":"1234",
-    "name":"Kj"
-}
-
-{
-    "email": "xyzw@gmail.com",
-    "password":"12345",
-    "name":"Kj2"
-}
-
-{
-    "email": "xyzvw@gmail.com",
-    "password":"123456",
-    "name":"Kj3"
-}
-
-{
-    "email": "xyzuvw@gmail.com",
-    "password":"1234567",
-    "name":"Kj4"
-}
-'''
