@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import { Toaster } from 'react-hot-toast';
 
 import Login from "./pages/Auth/Login";
 import SignUp from "./pages/Auth/SignUp";
@@ -23,6 +24,14 @@ function App() {
             <Route path='/expense' exact element={<Expense />} />
           </Routes>
         </Router>
+        <Toaster 
+          toastOptions={{
+            className: "",
+            style: {
+              fontSize:'13px'
+            },
+          }}
+        />
       </UserProvider>
     </>
   )

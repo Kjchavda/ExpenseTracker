@@ -22,6 +22,10 @@ class Token(BaseModel):
     token_type: str
     user: UserOut
 
+class UserInfo(BaseModel):
+    name: str
+    email: EmailStr
+
 
 class IncomeCreate(BaseModel):
     amount: int
@@ -30,9 +34,10 @@ class IncomeCreate(BaseModel):
     date: Optional[datetime.date] = datetime.date.today()
 
 class IncomeOut(BaseModel):
+    id: int
     amount: int
     source: str
-    description: str
+    description: Optional[str] = None
     date: datetime.date
 
     class Config:
@@ -45,9 +50,10 @@ class ExpenseCreate(BaseModel):
     date: Optional[datetime.date] = datetime.date.today()
 
 class ExpenseOut(BaseModel):
+    id: int
     amount: int
     category: str
-    description: str
+    description: Optional[str] = None
     date: datetime.date
 
     class Config:

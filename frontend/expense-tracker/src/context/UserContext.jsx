@@ -22,7 +22,6 @@ export const UserProvider = ({ children }) => {
         clearUser,
     }}
     >
-        {console.log("UserContext: user =", user)}
         {children}
 
     </UserContext.Provider>

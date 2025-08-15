@@ -23,14 +23,19 @@ def get_last_five_expense(db: Session, user_id: int):
     return expenses
 
 def format_transaction(txn, txn_type: str):
-    return {
+    txn_data = {
         "id": txn.id,
         "amount": txn.amount,
-        # "description": txn.description,
-        # "category_or_source": getattr(txn, "category", getattr(txn, "source", None)),
         "date": txn.date,
         "type": txn_type
     }
+
+    if txn_type == "income":
+        txn_data["source"] = txn.source
+    elif txn_type == "expense":
+        txn_data["category"] = txn.category
+
+    return txn_data
 
 
 def get_last_five_transactions(db:Session, user_id: int):
@@ -58,7 +63,11 @@ def get_last_30_days_expenses(db: Session, user_id: int):
         .order_by(backend.models.Expense.date.desc())
         .all()
         )
-    return expenses
+    total = db.query(func.sum(backend.models.Expense.amount)).filter(backend.models.Expense.user_id == user_id, backend.models.Expense.date >= thirty_days).scalar()
+    return {
+        "total": total,
+        "expenses": expenses
+    }
 
 def get_last_60_days_incomes(db: Session, user_id: int):
     sixty_days = date.today()-timedelta(days=60)
@@ -71,4 +80,8 @@ def get_last_60_days_incomes(db: Session, user_id: int):
         .order_by(backend.models.Income.date.desc())
         .all()
         )
-    return incomes
+    total = db.query(func.sum(backend.models.Income.amount)).filter(backend.models.Income.user_id == user_id, backend.models.Income.date >= sixty_days).scalar()
+    return {
+        "total": total,
+        "incomes": incomes
+    }

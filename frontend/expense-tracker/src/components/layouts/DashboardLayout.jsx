@@ -9,7 +9,6 @@ const DashboardLayout = ({children, activeMenu}) => {
   return (
     <div className=''>
         <Navbar activeMenu={activeMenu} />
-        {console.log(user)}
         {
             user && (
                 <div className='flex'>

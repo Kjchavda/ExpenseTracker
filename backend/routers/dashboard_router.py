@@ -29,7 +29,7 @@ def fetch_dashboard_data(db: Session=Depends(get_db), current_user = Depends(get
         "total_balance": total_income-total_expense,
         "total_income": total_income,
         "total_expense": total_expense,
-        "last_five_transactions": last_five_transactions,
+        "recent_transactions": last_five_transactions,
         "last_30_days_expenses": last_thirty_day_expenses,
         "last_60_day_incomes": last_sixty_day_incomes
     }
