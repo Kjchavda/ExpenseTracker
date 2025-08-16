@@ -2,7 +2,7 @@ from sqlalchemy import func
 from sqlalchemy.orm import Session
 from datetime import date, timedelta
 
-from .. import models
+from backend import models
 
 def get_total_income(db: Session, user_id: int):
     total_income = db.query(func.sum(models.Income.amount)).filter(models.Income.user_id == user_id).scalar()
