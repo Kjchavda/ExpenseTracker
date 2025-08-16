@@ -2,24 +2,24 @@ from sqlalchemy import func
 from sqlalchemy.orm import Session
 from datetime import date, timedelta
 
-import backend.models
+from .. import models
 
 def get_total_income(db: Session, user_id: int):
-    total_income = db.query(func.sum(backend.models.Income.amount)).filter(backend.models.Income.user_id == user_id).scalar()
+    total_income = db.query(func.sum(models.Income.amount)).filter(models.Income.user_id == user_id).scalar()
     
     return total_income
 
 def get_total_expense(db: Session, user_id: int):
-    total_expense = db.query(func.sum(backend.models.Expense.amount)).filter(backend.models.Expense.user_id == user_id).scalar()
+    total_expense = db.query(func.sum(models.Expense.amount)).filter(models.Expense.user_id == user_id).scalar()
     
     return total_expense
 
 def get_last_five_income(db: Session, user_id: int):
-    incomes = db.query(backend.models.Income).filter(backend.models.Income.user_id == user_id).order_by(backend.models.Income.date.desc()).limit(5).all()
+    incomes = db.query(models.Income).filter(models.Income.user_id == user_id).order_by(models.Income.date.desc()).limit(5).all()
     return incomes
 
 def get_last_five_expense(db: Session, user_id: int):
-    expenses = db.query(backend.models.Expense).filter(backend.models.Expense.user_id == user_id).order_by(backend.models.Expense.date.desc()).limit(5).all()
+    expenses = db.query(models.Expense).filter(models.Expense.user_id == user_id).order_by(models.Expense.date.desc()).limit(5).all()
     return expenses
 
 def format_transaction(txn, txn_type: str):
@@ -56,14 +56,14 @@ def get_last_30_days_expenses(db: Session, user_id: int):
     thirty_days = date.today()-timedelta(days=30)
 
     expenses = (
-        db.query(backend.models.Expense)
+        db.query(models.Expense)
         .filter(
-            backend.models.Expense.user_id == user_id, 
-            backend.models.Expense.date >= thirty_days)
-        .order_by(backend.models.Expense.date.desc())
+            models.Expense.user_id == user_id, 
+            models.Expense.date >= thirty_days)
+        .order_by(models.Expense.date.desc())
         .all()
         )
-    total = db.query(func.sum(backend.models.Expense.amount)).filter(backend.models.Expense.user_id == user_id, backend.models.Expense.date >= thirty_days).scalar()
+    total = db.query(func.sum(models.Expense.amount)).filter(models.Expense.user_id == user_id, models.Expense.date >= thirty_days).scalar()
     return {
         "total": total,
         "expenses": expenses
@@ -73,14 +73,14 @@ def get_last_60_days_incomes(db: Session, user_id: int):
     sixty_days = date.today()-timedelta(days=60)
 
     incomes = (
-        db.query(backend.models.Income)
+        db.query(models.Income)
         .filter(
-            backend.models.Income.user_id == user_id, 
-            backend.models.Income.date >= sixty_days)
-        .order_by(backend.models.Income.date.desc())
+            models.Income.user_id == user_id, 
+            models.Income.date >= sixty_days)
+        .order_by(models.Income.date.desc())
         .all()
         )
-    total = db.query(func.sum(backend.models.Income.amount)).filter(backend.models.Income.user_id == user_id, backend.models.Income.date >= sixty_days).scalar()
+    total = db.query(func.sum(models.Income.amount)).filter(models.Income.user_id == user_id, models.Income.date >= sixty_days).scalar()
     return {
         "total": total,
         "incomes": incomes

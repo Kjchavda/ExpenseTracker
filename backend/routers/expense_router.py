@@ -2,12 +2,12 @@ from typing import List
 from fastapi import APIRouter, Depends, HTTPException, status
 from sqlalchemy.orm import Session
 from fastapi.security import OAuth2PasswordRequestForm
-from backend.crud import crud_expense
-from backend.database import get_db
-from backend.utils.dependencies import get_current_user
-from backend.utils.security_utils import hash_password, verify_password, create_access_token
-import backend.models
-from backend.schemas import ExpenseCreate, ExpenseOut, Token, UserCreate, UserOut
+from ..crud import crud_expense
+from ..database import get_db
+from ..utils.dependencies import get_current_user
+from ..utils.security_utils  import hash_password, verify_password, create_access_token
+from .. import models
+from ..schemas import ExpenseCreate, ExpenseOut, Token, UserCreate, UserOut
 
 expense_router = APIRouter(
     prefix="/expense",
