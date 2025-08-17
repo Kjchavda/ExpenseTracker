@@ -11,7 +11,7 @@ app = FastAPI()
 
 origins = [
     "http://localhost:5173",       # React dev server
-    
+    "https://expense-tracker-rose-psi.vercel.app/"
 ]
 
 app.add_middleware(
