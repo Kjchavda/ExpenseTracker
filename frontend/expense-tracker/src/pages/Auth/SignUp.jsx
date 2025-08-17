@@ -39,7 +39,7 @@ function SignUp() {
 
     //signUp API call.
     try {
-    const response = await axios.post("http://localhost:8000/auth/signup", {
+    const response = await axios.post("/auth/signup", {
       name: fullName,
       email: email,
       password: password
