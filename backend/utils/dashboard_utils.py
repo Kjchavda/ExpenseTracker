@@ -5,12 +5,12 @@ from datetime import date, timedelta
 from backend import models
 
 def get_total_income(db: Session, user_id: int):
-    total_income = db.query(func.sum(models.Income.amount)).filter(models.Income.user_id == user_id).scalar()
+    total_income = db.query(func.coalesce(func.sum(models.Income.amount), 0)).filter(models.Income.user_id == user_id).scalar()
     
     return total_income
 
 def get_total_expense(db: Session, user_id: int):
-    total_expense = db.query(func.sum(models.Expense.amount)).filter(models.Expense.user_id == user_id).scalar()
+    total_expense = db.query(func.coalesce(func.sum(models.Expense.amount), 0)).filter(models.Expense.user_id == user_id).scalar()
     
     return total_expense
 
@@ -63,7 +63,11 @@ def get_last_30_days_expenses(db: Session, user_id: int):
         .order_by(models.Expense.date.desc())
         .all()
         )
-    total = db.query(func.sum(models.Expense.amount)).filter(models.Expense.user_id == user_id, models.Expense.date >= thirty_days).scalar()
+    total =  (
+        db.query(func.coalesce(func.sum(models.Expense.amount), 0))
+        .filter(models.Expense.user_id == user_id, models.Expense.date >= thirty_days)
+        .scalar()
+    )
     return {
         "total": total,
         "expenses": expenses
@@ -80,7 +84,11 @@ def get_last_60_days_incomes(db: Session, user_id: int):
         .order_by(models.Income.date.desc())
         .all()
         )
-    total = db.query(func.sum(models.Income.amount)).filter(models.Income.user_id == user_id, models.Income.date >= sixty_days).scalar()
+    total = (
+        db.query(func.coalesce(func.sum(models.Income.amount), 0))
+        .filter(models.Income.user_id == user_id, models.Income.date >= sixty_days)
+        .scalar()
+    )
     return {
         "total": total,
         "incomes": incomes
