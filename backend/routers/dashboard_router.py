@@ -15,7 +15,7 @@ dashboard_router = APIRouter(
     tags=["Dashboard Routes"]
 )
 
-@dashboard_router.get("/")
+@dashboard_router.get("")
 def fetch_dashboard_data(db: Session=Depends(get_db), current_user = Depends(get_current_user)):
     total_income = dashboard_utils.get_total_income(db=db, user_id=current_user.id)
     total_expense = dashboard_utils.get_total_expense(db=db, user_id=current_user.id)

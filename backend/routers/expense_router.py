@@ -18,7 +18,7 @@ expense_router = APIRouter(
 def add_expense(expense: ExpenseCreate, db: Session = Depends(get_db), current_user = Depends(get_current_user)):
     return crud_expense.create(db=db, user_id = current_user.id, expense= expense)
 
-@expense_router.get("/", response_model=List[ExpenseOut])
+@expense_router.get("", response_model=List[ExpenseOut])
 def get_expenses(db: Session = Depends(get_db), current_user = Depends(get_current_user)):
     return crud_expense.get_all_expenses(db=db, user_id=current_user.id)
 

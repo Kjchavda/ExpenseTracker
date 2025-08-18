@@ -18,7 +18,7 @@ income_router = APIRouter(
 def add_income(income: IncomeCreate, db: Session = Depends(get_db), current_user = Depends(get_current_user)):
     return crud_income.create(db=db, user_id = current_user.id, income= income)
 
-@income_router.get("/", response_model=List[IncomeOut])
+@income_router.get("", response_model=List[IncomeOut])
 def get_incomes(db: Session = Depends(get_db), current_user = Depends(get_current_user)):
     return crud_income.get_all_incomes(db=db, user_id=current_user.id)
 
