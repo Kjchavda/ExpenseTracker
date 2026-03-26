@@ -11,16 +11,19 @@ class UserCreate(BaseModel):
     password: str
 
 class UserOut(BaseModel):
+    id: int
     email: EmailStr
     name: str
+    profile_image_url: Optional[str] = None 
 
     class Config:
+        from_attributes = True
         orm_mode = True
 
 class Token(BaseModel):
     access_token: str
     token_type: str
-    user: UserOut
+    user: UserOut 
 
 class UserInfo(BaseModel):
     name: str
