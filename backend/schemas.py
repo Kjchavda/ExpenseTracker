@@ -26,8 +26,10 @@ class Token(BaseModel):
     user: UserOut 
 
 class UserInfo(BaseModel):
+    id: int 
     name: str
     email: EmailStr
+    profile_image_url: Optional[str] = None
 
 
 class IncomeCreate(BaseModel):
