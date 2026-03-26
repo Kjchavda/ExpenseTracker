@@ -30,9 +30,9 @@ const SideMenu = ({activeMenu}) => {
         <div className='flex flex-col items-center justify-center gap-3 mt-3 mb-7   '>
             {/*img logic 2:17:37 */}
             {
-                user?.profileImageUrl ? (
+                user?.profile_image_url ? (
                     <img 
-                        src={user?.profileImageUrl || ""}
+                        src={user?.profile_image_url || ""}
                         alt='Profile Image'
                         className='w-20 h-20 bg-slate-400 rounded-full '
                     />
