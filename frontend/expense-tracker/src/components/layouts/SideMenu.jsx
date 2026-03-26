@@ -83,10 +83,12 @@ const SideMenu = ({ activeMenu }) => {
           </div>
 
           {/* Hover Overlay */}
-          <div className='absolute inset-0 bg-black/40 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity'>
-            <p className='text-[10px] text-white font-medium'>
-              {uploading ? "..." : "UPDATE"}
-            </p>
+          <div className='absolute inset-0 bg-black/60 rounded-full flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity z-10'>
+            {uploading ? (
+              <p className='text-xs text-white font-medium'>...</p>
+            ) : (
+              <Upload className='text-white w-6 h-6' />
+            )}
           </div>
         </div>
 
