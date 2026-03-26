@@ -10,7 +10,8 @@ class User(Base):
     hashed_password = Column(String, nullable=False)
     email = Column(String, nullable=False)
     name = Column(String, nullable=False)
-
+    profile_image_url = Column(String, nullable=True, default="https://res.cloudinary.com/demo/image/upload/v1312461204/sample.jpg")
+    
     incomes = relationship("Income", back_populates="user", cascade="all, delete")
     expenses = relationship("Expense", back_populates="user", cascade="all, delete")
 
