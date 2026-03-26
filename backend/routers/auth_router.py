@@ -55,7 +55,7 @@ def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depend
 
     access_token = create_access_token(data={"sub": str(user.id)})
     # We return the token; the frontend uses /getUser to fetch the profile image later
-    return {"access_token": access_token, "token_type": "bearer"}
+    return {"access_token": access_token, "token_type": "bearer", "user": user}
 
 # --- 4. PROFILE IMAGE UPLOAD (The "Feature" Route) ---
 @auth_router.patch("/update-avatar", response_model=UserOut)
