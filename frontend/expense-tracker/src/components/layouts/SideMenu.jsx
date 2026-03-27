@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import CharAvatar from '../Cards/CharAvatar';
 import axios from '../../api/axios';
-import { Upload } from 'lucide-react'; // Make sure you have this installed, or use any icon you prefer
+import { FiUpload } from 'react-icons/fi'; 
 
 const SideMenu = ({ activeMenu }) => {
     const { user, updateUser, clearUser } = useContext(UserContext);
