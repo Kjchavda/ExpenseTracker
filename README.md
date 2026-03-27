@@ -65,24 +65,23 @@ Designed a strict, highly relational **PostgreSQL** schema using SQLAlchemy and 
 
 ## 📸 Gallery
 
-<details\>
-<summary\>Click to view Interactive Dashboard\</summary\>
-<br>
-<img src="docs/dashboard-demo.gif" alt="Dashboard Screenshot"\>
-</details\>
+<details>
+  <summary>Click to view Interactive Dashboard</summary>
+  <br>
+  <img src="docs/dashboard-demo.gif" alt="Dashboard Screenshot">
+</details>
 
-<details\>
-<summary\>Click to view Cloudinary Profile Upload in Action\</summary\>
-<br>
-<img src="docs/profile-upload.gif" alt="Profile Upload GIF"\>
-</details\>
+<details>
+  <summary>Click to view Cloudinary Profile Upload in Action</summary>
+  <br>
+  <img src="docs/profile-upload.gif" alt="Profile Upload GIF">
+</details>
 
-<details\>
-<summary\>Click to view Transaction Management\</summary\>
-<br>
-<img src="docs/transactions-demo.gif" alt="Transaction Management GIF"\>
-</details\>
-
+<details>
+  <summary>Click to view Transaction Management</summary>
+  <br>
+  <img src="docs/transactions-demo.gif" alt="Transaction Management GIF">
+</details>
 -----
 
 ## 🛠️ Local Development Setup
